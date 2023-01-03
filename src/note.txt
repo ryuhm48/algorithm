@@ -1,0 +1,546 @@
+자바 이론
+1. 메모리 구조
+- static 설계도 클래스 자동초기화
+- stack 거푸집
+- heap new
+
+2. 객체 생성 순서
+설계도 올라감(클래스 맴버 변수 : 스태틱 생성자로 초기화) - 부모 올라감 - 맴버변수 초기화 (자동초기화 -> 생성자에의한 초기화)
+- 컴퓨터에 의한 주소 - 개발자를 위한 레퍼런스 주소 - 해시 테이블 생성
+
+3. oop(a pie)
+추상화 상속 은닉화 다형성
+
+4. Inheritance(상속)
+extends
+생성자와 private 상속못받음
+static- 오버라이딩 없음
+
+5. 메모리 특징
+자생부생 자식이 생성되면 부모도 생성 (heap)
+자설부설 자식의 설계도가 올라가면 부모의 주소도 올라감(class)
+생주부주 생성된 주소는 부모주소(heap)
+설공메사 설계도의 공개된 메서드만 사용가능
+
+6. 다형성 발생원리	
+부타자생 부모의 타입으로 자식을 생성
+부타자참 부모의 타입으로 자식을 참조가능
+부메자호 부모의 메서드로 자식의 메서드 호출 가능(오버라이딩)
+super this
+
+7. 배열
+immutable
+fill
+얕은 복사 a=b 
+깊은 복사 arraycopy copyof clone(1차원)
+indexof
+length
+
+
+8. Object
+java.lang.Object
+모든 객체의 최상위 getClass equals hashCode toString
+
+9. 생성자
+리턴없음(오버로딩때문)
+디폴트 자동생성 but 하나라도 생성 시 자동생성x
+생성자 위에 코드 작성 불가
+
+10. Abstraction(추상화)
+simplification - 간략화(맴버필드  
+abstraction - 
+
+11. Polymorphism(다형성)
+
+12. 문자열자르기
+StringTokenizer
+subString
+split
+
+13. static
+객체 생성없이 사용하기 위한 용도 
+static은 설계도  객체가 없으므르 non static 사용 불가 - 객체 생성해야 가능
+non static에서 static 사용 가능
+
+14.final
+class - 상속 금지
+method - 오버라이딩 금지
+variable - 상수(interface 변수는 자동상수)
+
+15. Encapsulation(은닉화)
+데이터 하이딩 - 메서드 최종 위치에서 멤버찾기
+동시에 같은 이름이 있으면 최종 위치에서 멤버찾아서
+자식쪽의 데이터를 사용하려면 null, 0 일 수 있다.(오버라이딩시)
+this -> super
+
+16. 접근제한자
+public protected default private
+
+17. instanceof
+힙에 타입이 있는지 확인 
+
+18. static 생성자
+non-static 보다 빠름
+static final 상수 초기화 가능
+
+19. 싱글톤
+private static BookManager manager = new BookManager();
+private BookManager() {	}
+public static BookManager getInstance() {return manager;}
+
+20. method
+??자판기야 
+
+21. abstract
+추상 클래스 
+메서드 선언만 존재
+구현안한 메서드 하나라도 존재 시 추상 클래스
+heap에 올라가지 않음
+자식에 구현을 해야함
+
+abstract
+interface
+상속강요
+
+
+22. Collection
+-set  중복 x 순서 x  add - HashSet TreeSet
+-list 중복 o 순서 o  add - ArrayList LinkedList Vector(legacy)
+-map (key,value) put - HashMap HashTable(legacy) 
+
+23. interface 
+순수 가상 함수
+데이터를 가질 수 없다 -> 변수 선언 시 상수화, 생성자가 없다
+implements
+interface 끼리는 extends
+heap에 올라가지 않음
+자식에 구현을 해야함
+
+24. String
+charAt
+toCharArray
+length
+valueOf
+indexOf
+compareTo
+lastIndexOf 
+substring
+replace
+contains
+trim
+concat
+String+기본타입은 String
+
+25. StringBuilder
+mutable
+
+26. Wrapper Class
+기본타입을 참조타입으로 감싸는 클래스
+Generic에는 객체타입만 들어간다
+
+27. 재귀
+
+28.Comparator<T>
+int compare(T o1, T o2)
+-1 ASD
+ 1 DESC
+ 0 Same
+ 다른 2개 비교
+ 
+ Comparable 자신과 다른것 비교
+ 
+29. Exception 계층구조
+Throwable - 예외처리 최상위
+java.lang에 위치
+1). Error (System)
+
+2). Exception (Program에서 안전하게 끝내기 위해 사용)
+	- RunTimeException
+	index 
+	format
+	math
+	null
+	- CompileTimeException
+	런타임이 없을시 컴파일타임익셉션
+	처리 안할시 에러
+	checked exception (IO, SQL, Remote)
+	사용자 정의 exception extends Exception
+	
+30. Exception 처리
+1). 처리
+	try catch finally
+	try catch, try finally try catch catch catch finally 가능
+	catch에 계층이 높은 에러는 아래에 배치할 것 - 아닐 시 unReachable 에러 발생
+	에러 여부 상관없이 finally로 이동
+	
+2). 회피
+	throw
+
+31. autocloseable
+try with resorce
+
+32. IOstream
+연속적인 데이터 흐름 - 한방향 섞이지 않음 byte(packet)단위
+
+33. IO
+3대 관점
+1). 모니터 기준 input output
+2). ~er(char) ~stream(byte)
+3). node - 수도꼭지 필수, filter - 기능 
+	byte char string file pipe socket 외에는 모두 filter
+	
+out은 close 필수
+
+34. 사용자가 정의한 예외
+
+35.Serializable(직렬화)
+markup interface - 구현할 method가 없음
+
+36. XML parsing Dom
+
+37. XML parsing SAX
+
+38.package
+물리적인 디렉토리, 체계적인 분류, 비슷한 역할클래스 별
+전체 소문자, 
+---------------------------------------------------------------------------------------------------------
+
+오버라이딩 - 자식의 접근제한자는 부모보다 같거나 커야함
+컨테이너 - 스스로 상태를 앎
+
+의존관계 - 화살표
+
+this. 내 것 검색 후 super 검색
+
+is has dependency
+interface has 관계
+
+String method 
+trim() 양쪽 공백 제거
+replace() inner 공백 제거
+
+홀수 마방진
+1. r = 0, c = n / 2
+2. r = (r + n - 1) % n, c = (c + n - 1) % n
+3. if(arr[r][c] != 0) r++, c
+
+짝수 마방진
+1. if (((i == 0 || i == n - 1) && (j != 0 && j != n - 1))
+			|| ((i != 0 && i != n - 1) && (j == 0 || j == n - 1)))
+
+singleton pattern
+factory pattern
+iterator pattern
+
+DOM - Document Object Model 
+	(tag-> element node 메모리)
+	CRUD 가능
+	<student> startElement
+	~~~ contents characters
+	</student> endElement
+	
+SAX - Simple API for XML
+	read만 가능
+	요소 만날시 이벤트 발생
+
+
+
+데이터 타입과 형변환, 연산자
+기본문장: switch, while, continue, break..
+클래스 설계
+생성자
+toString, equals, hashcode
+객체생성 : this, super
+다형성: Overloading, Overriding
+배열, 초기화
+자바 기본 API
+예외처리 블럭의 기능, abstract class, interface
+SAX, DOM Parser
+위 내용들의 기본 개념/특징 및 코드로 물어보는 문제가 출게됩니다.
+
+유일하게 형변환 없는 기본타입은 ? boolean
+i++  ++i 차이점
+
+2 switch fall through  char int String
+
+생성자 - default 생성자 특징 super() this() 주의 사항
+Object 4대 메서드 모두 외우기 리턴타입과 파라메터 까지
+다음중 에러가 발생하는 것은 - 오버라이딩과 오버로딩 주의할 점
+배열 - new 하는 배열과 new 안하는 배열 차이점
+new하는 배열 자동 초기화 -기본타입 0관련  0 0L 0.0 0F false
+
+참조타입 =null
+
+Book[] bs=new Book[3];
+
+주의 객체 생성된 것 아님
+
+Null Pinter  exception 
+
+ArrayIndexOutOfBoundsException 
+
+String 기본 메서드 외우기
+String char   charAt indexOf  lastIndexOf length()
+
+8 예외처리 계층구조    주의 사항
+
+Penguin extends Bird implements IFish, IMarin
+IA extends IB, IC, ID
+
+abstract 3대 사용방법
+
+interface default 메서드외 구현된 메서드가 있으면 안됨
+
+interface 구현강요
+
+abstract 상속강요  오버라이딩 강요
+
+Dom CRUD SAX R
+이벤트 드리븐 엘리먼트  컨텐트 /엘리먼트   -> startElement characters endElement 메서드 실행
+
+DOM 메모리에 XML을 올리고 노드로 처리
+
+루트엘리먼트는 하나 자식은 리스트
+
+자식의 자식도 리스트
+
+하나씩 빼서 엘리먼트 확인...
+
+
+---------------------------------------------------------------------------------------------------------
+
+알고리즘
+1. 사방
+배열 바꾸기
+b[i/c][i%c]=a[i]
+a[i*c+j]=b[i][j]
+
+배열 옮기기
+a[i+5%6]=a[i]
+
+2. 절댓값
+y=a|x-b|+c
+
+3. 등차수열
+an = a1+(n-1)d
+
+4. 재귀
+
+5.nextPermutation
+
+6.nextCombination
+nCr = nPr /(n-r)! = n!/(n-r)!r!
+
+7.완탐
+Brute Force,Exausted Search
+nPr = 서로다른 n개중 r개를 선택하여 나열  n!/(n-r)!
+nCr = 서로다른 n개중 r개를 선택  n!/(n-r)!r!
+subset = powerset 
+	{A,B,C} A 선택/비선택 x B 선택/비선택 x C 선택/비선택
+	개수 1<<N
+	
+8. 순열하고 비슷하나
+ start(나온수는 다시 나올 수 없다. )추가
+ 
+9. subset    1>>N
+         subset= powerset
+    {A, B, C}  A 선택/비선택 x B 선택/비선택 X C 선택/비선택
+        개수 1<<N 
+       subset(cnt, tot) 
+         subset(cnt+1, tot+p[cnt]) 
+         subset(cnt+1, tot) 
+        
+	
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+WEB
+1. block
+display block
+sementic tag로 필요
+
+2. layout
+float
+
+3. Sementic
+
+4. style
+---------------------------------------------------------------------------------------------------------
+
+*********************************************************************************************************
+0721 수업내용 필기
+*********************************************************************************************************
+
+1. oop
+객체지향언어의 특징
+추상화 - 현실의 객체를 추상화해서 클래스를 구성
+다형성 - 하나의 객체를 여러 가지 타입으로 참조 가능
+상속 - 부모 클래스의 자산을 물려받아 자식을 정의함으로 코드의 재사용이 가능
+ - 기존 클래스의 자산을 자식 클래스에서 재사용하기 위함
+ - 부모의 코드를 변경하면 모든 자식들에게도 적용 -> 유지보수성 향상
+ - extends 키워드 사용 
+ - 실선의 화살표 사용
+ - is a 관계
+ - Object 클래스 - 모든 클래스의 조상 클래스
+ - 포함관계 상속이외에 클래스를 재활용
+데이터은닉과 보호 - 데이터를 외부에 직접 노출시키지 않고 메서드를 이용해 보호
+
+메서드 재정의(overriding) - 조상 클래스에 정의된 메서드를 자식 클래스에서 적합하게 수정
+ - 메서드 이름이 같아야함, 매개 변수의 개수,타입,순서가 같아야함, 리턴 타입이 같아야함, 접근제한자는 부모보다 범위가 넓거나 같아야 함, 조상보다 더 큰 예외를 던질 수 없다.
+ - annotation 
+ 
+ this
+ super
+ 
+2. 접근제한자 및 데이터 은닉과 보호
+제한자 - 클래스,변수 메서드 선언부에 함께 사용되어 부가적인 의미부여
+public, protected, default, private
+static, final, abstract, synchronized
+하나의 대상에 여러 제한자를 조합 가능하나 접근 제한자는 하나만 사용 가능
+
+final - 더 이상 바뀔 수 없음
+class 상속금지 이미 완벽한 클래스들
+method 오버라이딩 금지
+variable 상수화
+
+접근제한자 
+public
+protected
+package(default)
+private
+
+데이터 은닉과 보호
+외부에서 변수에 직접 접근하지 못하도록 제한
+private -> get set
+
+싱글톤
+
+다형성
+하나의 객체가 많은 타입을 가질 수 있는 성질
+상속관계에서 조상클래스의 타입으로 자식클래스 객체를 레퍼런스할수있다.
+다형성의 활용 
+-다형성으로 다른 타입의 데이터를 하나의 배열로 관리
+-조상을 파라미터로 처리하면 객체의 타입에 따라 메서드를 만들 필요가 없음(메서드가 호출될 때 메서드 이름과 파라미터가 맞아야함)
+
+메모리에 있는 것과 사용할 수 있는 것의 차이
+큰집에서 작은집으로는 명시적 형변환 필요 
+instanceof 연산자로 객체 확인가능
+자식으로 생성한 부모의 메서드는 오버라이딩된 메서드 호출(virtual method invocation)
+참조변수의 레벨에 따른 객체의 멤버 연결
+-상위로 올라갈수록 활용도 높아짐 but 복잡성 증가
+-공통기능인 경우 object를 파라미터로 사용, 많은 경우 비즈니스 로직 상 최상위 객체 사용 권장
+
+*********************************************************************************************************
+0725 수업내용 필기
+*********************************************************************************************************
+
+추상클래스 
+자식 클래스에서 반드시 재정의해서 사용되기 때문에 조상의 구현이 필요없는 메서드
+객체 생성은 불가, 다형성은 가능
+구현을 강제해서 프로그램의 안정성 향상
+UML상에서 이탤릭으로 표현
+인터페이스에 있는 메서드 중 구현할 수 있는 메서드를 모아 편리성 제공~
+
+인터페이스
+일반 메서드는 모두 abstract 형태
+모든 멤버변수는 public static final이며 생략 가능
+모든 메서드는 public abstract이며 생략 가능
+extends를 이용해 다중 상속가능 
+implements를 통해 구현 - 점선 화살표
+인터페이스도 하나의 타입 -> 다형성 가능
+
+인터페이스의 필요성
+ - 구현의 강제로 표준화 처리 -> 손쉬운 모듈 고체 지원
+ - 서로 상속의 관계가 없는 클래스들에게 인터페이스를 통한 관계 부여로 다형성 확장
+ - 독립적인 프로그래밍으로 개발 기간 단축
+ 
+ default method
+  필요성
+ -기존 인터페이스 기반으로 동작하는 라이브러리의 인터페이스에 추가해야 하는 기능이 발생
+ - abstract가 아니므로 반드시 구현할 필요 x
+  충돌
+ - super class method 우선
+ - interface간 충돌시 반드시 재정의 해서 해결
+ 
+ static method 
+  구현체 클래스 없이 인터페이스 이름으로 접근
+ 
+Generics
+다양한 타입의 객체를 다루는 메서드, 컬렉션 클래스에서 컴파일 시에 타입 체크
+클래스 또는 인터페이스 선언 시 <>에 타입 파라미터 표시
+미리 명시해서 형변환하지 않아도됨
+
+type parameter의 제한
+-<T extends Number>
+
+Generic type 객체를 할당 받을 때 와일드 카드 이용
+<?>
+<? extends T>
+<? super T>
+
+Generic Method 
+
+*********************************************************************************************************
+0728 수업내용 필기
+*********************************************************************************************************
+I/O 와 Stream
+입력과 출력의 끝단 노드
+두 노드를 연결하고 데이터를 전송할 수 있는 개념 스트림
+스트림은 단방향으로만 통신이 가능하며 하나의 스트림으로 입력과 출력을 같이 처리할 수 없음
+
+byte stream
+char -er
+
+close() 스트림 종료시 반환
+​try-with-resources로 반환 가능
+
+flush() 버퍼 비움
+
+file
+가장 기본적인 입출력장치 중 하나로 파일과 디렉터리를 다루는 클래스
+
+보조스트림
+다른 스트림에 부가적인 기능을 제공하는 스트림
+문자set변환
+buffering
+기본데이터 형의 전송
+객체 입출력
+
+스트림 체이닝
+필요에 따라 여러 보조 스트림을 연결해서 사용 가능
+보조 스트림 close시 노드 스트림까지 호출
+
+보조스트림활용
+inputstreamreader outputstreamwriter
+byte기반 스트림을 char 기반으로 변경
+
+buffered계열
+입출력 효율을 높임
+
+객체 직렬화
+객체를 파일등에 저장하거나 네트워크로 전송하기 위해 연속적인 데이터로 변환하는 것
+반대의 경우 역직렬화
+Serializable 인터페이스 구현
+클래스의 모든 멤버가 인터페이스를 구현
+직렬화에서 제외 transient
+serialVersionUID 
+ - 클래스의 변경 여부를 파악하기 위한 유일 키
+ - 설정 안할 시 컴파일러가 자동 생성이므로 설정 권장
+
+
+
+*********************************************************************************************************
+0801 수업내용 필기
+*********************************************************************************************************
+nextInt(), nextDouble(), next()
+1. 구분자를 만날 때 까지 읽고, 구분자를 남겨 둔다.
+2. 처음으로 만나는 구분자(잔재)는 무시하고 유효문자부터 식별한 뒤 1을 반복한다.
+1
+​nextLine() 
+개행문자까지 읽어와 개행문자는 버리고 넘겨준다. 
+* nextInt() 등과 함께 쓰는 경우, 남겨진 개행 문자를 읽어올 수 있기 때문에 아무 문자열도 읽어오지 못한 것처럼 보일 수 있음.
+
+재귀함수
+1). 함수에 대한 정의를 명확히 해라 
+2). flat 평평하게 로직을 바라고기
+3). 각 재귀의 실행을 결정하는 결정요인은 매개변수로 선언
